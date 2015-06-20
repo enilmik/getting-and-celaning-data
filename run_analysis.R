@@ -45,3 +45,12 @@ mean_and_std_columnfilter <- grep("-(mean|std)\\(\\)",featureNames)
 # apply column filter on X_data
 X_data <- X_data[, mean_and_std_columnfilter]
 
+# Step 3.  Use descriptive activity names to name the activities in the data set 
+
+#Read acivities
+activities <- read.table("UCI HAR Dataset/activity_labels.txt")
+
+# Substitute number with activity name
+y_data[, 1] <- activities[y_data[, 1], 2]
+# Label coumn name properly
+names(y_data) <- "activity"
