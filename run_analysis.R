@@ -1,5 +1,8 @@
 
 # run_analysis.R - scriptfile for Course Project on Cousera "Getting and cleaning Data"
+#load library
+library(dplyr)
+
 #Step 0.  Downloading and unzipping dataset
 #Download
 if(!file.exists("./data")){dir.create("./data")} 
@@ -72,3 +75,11 @@ names(X_data) <- gsub("-mean\\(\\)", "Mean", names(X_data))
 
 # Use cbind to bind all the data in a single data set
 alldata <- cbind(X_data, y_data, subject_data) 
+
+# ?ddply
+#Step 5 creates a second, independent tidy data set with the average of each variable for each activity and each subject
+# length(names(X_data)) => 66 columns
+meandata <- ddply(alldata, .(subject, activity), function(x) colMeans(x[, 1:66])) 
+
+write.table(meandata, "tidydata.txt", row.name=FALSE)
+
