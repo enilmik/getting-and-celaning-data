@@ -54,3 +54,21 @@ activities <- read.table("UCI HAR Dataset/activity_labels.txt")
 y_data[, 1] <- activities[y_data[, 1], 2]
 # Label coumn name properly
 names(y_data) <- "activity"
+
+# Step 4. Appropriately labels the data set with descriptive variable names
+
+# Label column name properly for subejct_data
+names(subject_data) <- "subject" 
+
+# Clean X_data names, features_info.txt: prefix t = Time, prefix f = Frequency
+# use gsub and regex to change t to Time, f to Frequency
+names(X_data) <- gsub("^t", "Time", names(X_data))
+names(X_data) <- gsub("^f", "Frequency", names(X_data))
+
+# get rid of parantheis in stat functions
+names(X_data) <- gsub("-std\\(\\)", "StdDev", names(X_data))
+names(X_data) <- gsub("-mean\\(\\)", "Mean", names(X_data))
+# names(X_data)
+
+# Use cbind to bind all the data in a single data set
+alldata <- cbind(X_data, y_data, subject_data) 
