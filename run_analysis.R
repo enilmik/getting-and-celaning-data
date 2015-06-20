@@ -21,3 +21,14 @@ subject_train <- read.table("./UCI HAR Dataset/train/subject_train.txt")
 X_test <- read.table("./UCI HAR Dataset/test/X_test.txt")
 y_test <- read.table("./UCI HAR Dataset/test/y_test.txt")
 subject_test <- read.table("./UCI HAR Dataset/test/subject_test.txt")
+
+# merge data sets using rbind
+
+# X data merged
+X_data <- rbind(X_train, X_test) 
+
+# y data merged
+y_data <- rbind(y_train, y_test)
+
+# subject data merged
+subject_data <- rbind(subject_train, subject_test)
