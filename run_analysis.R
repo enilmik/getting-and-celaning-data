@@ -32,3 +32,16 @@ y_data <- rbind(y_train, y_test)
 
 # subject data merged
 subject_data <- rbind(subject_train, subject_test)
+
+# Step 2. Only extract the measurements on the mean and standard deviation for each measuemrent
+
+# Read column names
+featureNames <- read.table("UCI HAR Dataset/features.txt")[,2]
+
+names(X_data) <- featureNames
+
+mean_and_std_columnfilter <- grep("-(mean|std)\\(\\)",featureNames)
+
+# apply column filter on X_data
+X_data <- X_data[, mean_and_std_columnfilter]
+
